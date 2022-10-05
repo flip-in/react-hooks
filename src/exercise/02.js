@@ -18,7 +18,7 @@ function useLocalStorageState(key, defaultValue = '') {
     if (items) {
       return JSON.parse(items)
     }
-    return defaultValue
+    return typeof defaultValue === 'function' ? defaultValue() : defaultValue
   })
 
   useEffect(() => {
