@@ -3,11 +3,19 @@
 
 import * as React from 'react'
 
-function Name({name, onNameChange}) {
+//Extra Credit: remove props✅
+
+function Name() {
+  const [name, setName] = React.useState('')
   return (
     <div>
       <label htmlFor="name">Name: </label>
-      <input id="name" value={name} onChange={onNameChange} />
+      {/*extra credit: add the onChange handler ✅*/}
+      <input
+        id="name"
+        value={name}
+        onChange={event => setName(event.target.value)}
+      />
     </div>
   )
 }
@@ -24,9 +32,15 @@ function FavoriteAnimal({animal, onAnimalChange}) {
   )
 }
 
-// 🐨 uncomment this
-function Display({name, animal}) {
-  return <div>{`Hey ${name}, your favorite animal is: ${animal}!`}</div>
+// 🐨 uncomment this ✅
+// Extra credit: Comment this ✅
+// function Display({name, animal}) {
+//   return <div>{`Hey ${name}, your favorite animal is: ${animal}!`}</div>
+// }
+
+//Extra credit: need new component to show just animal text ✅
+function Display({animal}) {
+  return <div>{`Your favorite animal is: ${animal}!`}</div>
 }
 
 // 💣 remove this component in favor of the new one ✅
@@ -36,18 +50,20 @@ function Display({name, animal}) {
 
 function App() {
   // 🐨 add a useState for the animal ✅
+  // Extra Credit: colocate name to it's component ✅
   const [animal, setAnimal] = React.useState('')
-  const [name, setName] = React.useState('')
   return (
     <form>
-      <Name name={name} onNameChange={event => setName(event.target.value)} />
+      {/*extra credit: move onChange to name component✅*/}
+      <Name />
       {/* 🐨 pass the animal and onAnimalChange prop here (similar to the Name component above) ✅*/}
       <FavoriteAnimal
         animal={animal}
         onAnimalChange={event => setAnimal(event.target.value)}
       />
       {/* 🐨 pass the animal prop here ✅ */}
-      <Display name={name} animal={animal} />
+      {/* Extra Credit: Don't need name prop here✅*/}
+      <Display animal={animal} />
     </form>
   )
 }
